@@ -52,12 +52,10 @@ export default function LectureLensPage() {
     resetQuizState();
   };
 
-  // 용량 제한 검증 및 챕터별 업로드 안내 핸들러
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // 4.5MB 제한 사전 검사 및 친절한 가이드
     const MAX_SIZE_MB = 4.5;
     if (file.size > MAX_SIZE_MB * 1024 * 1024) {
       alert(
@@ -140,7 +138,6 @@ export default function LectureLensPage() {
       </header>
 
       <div className="max-w-7xl mx-auto px-6 py-5">
-        {/* 업로드 메인 카드 */}
         <div className="bg-gradient-to-r from-teal-50 to-emerald-50 border border-teal-100 rounded-2xl p-4 shadow-sm flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center text-2xl border border-teal-100">
@@ -150,7 +147,9 @@ export default function LectureLensPage() {
               <h2 className="text-lg font-bold text-slate-800">
                 {data?.document_title ? `[학습 중] ${data.document_title}` : "전공 서적 / 논문 PDF 업로드"}
               </h2>
-              <p className="text-xs text-slate-500">영어 원서나 복잡한 수식이 포함된 PDF를 올리면 AI가 10초 만에 분석합니다.</p>
+              <p className="text-xs text-slate-500 font-medium mt-0.5">
+                영어 원서나 수식이 포함된 PDF를 올리면 AI가 즉시 분석합니다. (최대 4.5MB 지원)
+              </p>
             </div>
           </div>
           <div className="flex items-center space-x-3">
@@ -167,16 +166,16 @@ export default function LectureLensPage() {
           </div>
         </div>
 
-        {/* 1번 방식: 상시 안내 팁 배너 */}
-        <div className="mt-2.5 flex items-center justify-between bg-amber-50/90 border border-amber-200/80 rounded-xl px-4 py-2 text-xs text-amber-900 shadow-sm">
-          <div className="flex items-center space-x-2">
-            <span className="text-sm">💡</span>
+        {/* ⚠️ 상시 고정 알림 배너 */}
+        <div className="mt-3 flex items-center justify-between bg-amber-50 border border-amber-200 rounded-xl px-4 py-2.5 text-xs text-amber-900 shadow-sm">
+          <div className="flex items-center space-x-2.5">
+            <span className="text-base">⚠️</span>
             <span>
-              <strong className="font-semibold text-amber-950">학습 최적화 팁:</strong> 방대한 원서 전체보다 시험/세미나 범위인 <strong>챕터별(1~30페이지, 4.5MB 이하)</strong>로 업로드하시면 가장 정밀한 핵심 요약과 개념 퀴즈가 생성됩니다.
+              <strong className="font-bold text-amber-950">[업로드 규격 안내]</strong> 원활하고 정밀한 AI 분석을 위해 <strong>4.5MB 이하의 PDF 파일만 업로드</strong>해 주세요. 두꺼운 전공 서적은 시험/세미나 범위인 <strong>챕터별(1~30페이지)</strong>로 분할하여 업로드하시는 것을 권장합니다.
             </span>
           </div>
-          <span className="text-[11px] font-medium bg-amber-200/60 text-amber-900 px-2 py-0.5 rounded-full border border-amber-300/80 whitespace-nowrap ml-3">
-            권장 규격: 4.5MB 이하
+          <span className="text-[11px] font-bold bg-amber-200/80 text-amber-950 px-2.5 py-1 rounded-lg border border-amber-300 whitespace-nowrap ml-4">
+            최대 용량: 4.5MB 이하
           </span>
         </div>
 
